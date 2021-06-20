@@ -17,7 +17,12 @@ const FloatingPlusButton = (props) => {
     extraStyles.push({ bottom: props.bottom });
   }
   return (
-    <TouchableOpacity style={[styles.button, styles.shadow, extraStyles]} activeOpacity={0.7} onPress={props.onPress}>
+    <TouchableOpacity
+      style={[styles.button, styles.shadow, extraStyles]}
+      activeOpacity={0.7}
+      onPress={props.onPress}
+      delayPressIn={0}
+    >
       <PLUS width="100%" height={36} fill="#FFFFFF" />
     </TouchableOpacity>
   );

@@ -8,13 +8,17 @@ import USER from "../assets/icons/user.svg";
 const BottomBar = (props) => {
   return (
     <View style={styles.bottomBar}>
-      {/* <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+      {/* <TouchableOpacity style={styles.button} activeOpacity={0.7} delayPressIn={0}>
         <HEART width="100%" height={36} fill="#FFFFFF" />
       </TouchableOpacity> */}
-      <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.7}
+        delayPressIn={0}
+      >
         <HOME width="100%" height={36} fill="#FFFFFF" />
       </TouchableOpacity>
-      {/* <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+      {/* <TouchableOpacity style={styles.button} activeOpacity={0.7} delayPressIn={0}>
         <USER width="100%" height={36} fill="#FFFFFF" />
       </TouchableOpacity> */}
     </View>
