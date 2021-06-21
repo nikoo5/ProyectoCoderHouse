@@ -5,9 +5,13 @@ import CustomStatusBar from "../components/CustomStatusBar"
 import FloatingPlusButton from "../components/FloatingPlusButton";
 import Header from "../components/Header"
 import ModalAdd from "../components/homeScreen/ModalAdd";
+import ModalDelete from "../components/homeScreen/ModalDelete";
 import Post from "../components/homeScreen/Post";
 
-//Información de Prueba
+/*
+    Información de prueba
+    Solo disponible de forma hard-coded para muestra de la app en los desafíos
+*/
 const author_me = {
   id: "52ab16cc-89af-403c-bbfd-3a68b4fd32ce",
   name: "Nicolás Filippi Farmar",
@@ -25,33 +29,33 @@ const author_coder = {
 const initialPosts = [
   {
     author: author_me,
-    date: "2021-06-20T09:17:55.682Z",
+    date: "2021-06-20T00:00:05.000Z",
     id: "009c3373-be69-4118-b8a2-a4ba78adfcac",
     message: "Hola Coder!",
   },
   {
     author: author_me,
-    date: "2021-06-20T09:18:13.149Z",
+    date: "2021-06-20T00:00:04.000Z",
     id: "7e069544-a76a-467c-8f1c-e828d9c3a1ff",
     message: "Esta es mi aplicación para el primer desafío!",
   },
   {
     author: author_coder,
-    date: "2021-06-20T09:18:49.648Z",
+    date: "2021-06-20T00:00:03.000Z",
     id: "4100085b-3a17-4a2d-a73a-a27fce2c847a",
     message:
       'Haciendo tap en el botón del "+", podrán agregar un nuevo posteo a la lista...',
   },
   {
     author: author_me,
-    date: "2021-06-20T09:21:53.250Z",
+    date: "2021-06-20T00:00:02.000Z",
     id: "7bdaba7a-f7b7-437f-990d-96131019db13",
     message:
       "Para eliminar cualquiera de los posteos, solo se requiere mantener presionado un posteo y así acceder al cartel de confirmación de eliminación!",
   },
   {
     author: author_coder,
-    date: "2021-06-20T09:35:50.723Z",
+    date: "2021-06-20T00:00:01.000Z",
     id: "abf83175-2442-4023-bcf7-3266ff2cfd36",
     message: "Saludos!!!",
   },
@@ -59,8 +63,11 @@ const initialPosts = [
 
 const MainScreen = () => {
   const [modalAddVisible, setModalAddVisible] = useState(false)
-  const [listItems, setListItems] = useState(initialPosts);
-  
+  const [modalDeleteVisible, setModalDeleteVisible] = useState(false)
+  const [selectedPost, setSelectedPost] = useState({author: {name: ''}})
+
+  const [listPosts, setListPosts] = useState(initialPosts);
+
   const handleModalAdd = () => {
     setModalAddVisible(true);
   }
@@ -72,9 +79,23 @@ const MainScreen = () => {
       let uuid = require("uuid")
       let newId = uuid.v4();
 
-      setListItems([{id: newId, author: author_coder, date: (new Date()), message: message}, ...listItems])
+      setListPosts([{id: newId, author: author_coder, date: (new Date()), message: message}, ...listPosts])
     }
     setModalAddVisible(false);
+  }
+
+  const handleModalDelete = (post) => {
+    setSelectedPost(post);
+    setModalDeleteVisible(true);
+  }
+
+  const handleCancelDelete = () => {
+    setModalDeleteVisible(false);  
+  }
+
+  const handleConfirmDelete = (postId) => {
+    setModalDeleteVisible(false);  
+    setListPosts(listPosts.filter(x => x.id != postId));
   }
 
   return (
@@ -85,18 +106,31 @@ const MainScreen = () => {
         onConfirm={handleConfirmAdd}
       />
 
+      <ModalDelete
+        visible={modalDeleteVisible}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        postId={selectedPost.id}
+        authorName={selectedPost.author.name}
+      />
+
       <CustomStatusBar />
       <Header title="Inicio" />
-      <FlatList style={styles.mainContainer}
-        data={listItems}
-        keyExtractor={x => x.id}
-        renderItem={data => {
+      <FlatList
+        style={styles.mainContainer}
+        data={listPosts}
+        keyExtractor={(x) => x.id}
+        renderItem={(data) => {
           return (
             <Post
+              id={data.item.id}
               image={data.item.author.image}
               author={data.item.author.name}
               date={data.item.date}
               message={data.item.message}
+              onSelected={() => {
+                handleModalDelete(data.item);
+              }}
             />
           );
         }}

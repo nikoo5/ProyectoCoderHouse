@@ -10,7 +10,7 @@ const ButtonPrimary = (props) => {
 
     return (
       <TouchableOpacity
-        style={[styles.button, styles.shadow, extraStyles]}
+        style={[styles.button, styles.shadow, extraStyles, props.style]}
         onPress={props.onPress}
         delayPressIn={0}
         activeOpacity={0.7}

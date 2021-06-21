@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { StyleSheet, TextInput, View } from "react-native"
 import ButtonPrimary from "../ButtonPrimary";
+import ButtonSecondary from "../ButtonSecondary";
 import CustomModal from "../CustomModal"
 
 const ModalAdd = (props) => {
@@ -23,7 +24,7 @@ const ModalAdd = (props) => {
             value={message}
           />
           <View style={styles.buttonsContainer}>
-            <ButtonPrimary
+            <ButtonSecondary
               text="CANCELAR"
               width={100}
               onPress={props.onCancel}
