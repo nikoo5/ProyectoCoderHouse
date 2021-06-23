@@ -3,8 +3,6 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Moment from 'moment';
 
 const Post = (props) => {
-  const [dateTime, setDateTime] = useState('');
-
   const dateConvert = (date) => {
     let dt = new Date();
     let dtPost = new Date(date);
@@ -41,19 +39,14 @@ const Post = (props) => {
     props.onSelected(postId);
   }
 
-  useEffect(() => {
-    setDateTime(dateConvert(props.date));
-    let timeoutHandle = setTimeout(() => {
-      setDateTime(dateConvert(props.date));
-    }, 20 * 1000);
-  }, null) ;
-
   return (
     <TouchableOpacity
       style={styles.post}
       activeOpacity={0.9}
       delayPressIn={0}
-      onLongPress={() => {handleSelectItem(props.id)}}
+      onLongPress={() => {
+        handleSelectItem(props.id);
+      }}
     >
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: props.image }} />
@@ -61,7 +54,7 @@ const Post = (props) => {
       <View style={[styles.dataContainer, styles.shadow]}>
         <View style={styles.infoContainer}>
           <Text style={styles.author}>{props.author}</Text>
-          <Text style={styles.date}>{dateTime}</Text>
+          <Text style={styles.date}>{dateConvert(props.date)}</Text>
         </View>
         <Text>{messageCleaner(props.message)}</Text>
       </View>
