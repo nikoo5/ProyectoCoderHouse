@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import HEART from "../assets/icons/heart.svg";
 import HOME from "../assets/icons/home.svg"
 import USER from "../assets/icons/user.svg";
+import Colors from "../constants/Colors";
 
 const BottomBar = (props) => {
   return (
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#7B1FA2",
+    backgroundColor: Colors.primary.dark,
   },
   button: {
     flex: 1

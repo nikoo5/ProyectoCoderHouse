@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity} from "react-native";
 import PLUS from "../assets/icons/plus.svg";
+import Colors from "../constants/Colors";
 
 const FloatingPlusButton = (props) => {
   const extraStyles = [];
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   button: {
     width: 60,
     height: 60,
-    backgroundColor: "#7B1FA2",
+    backgroundColor: Colors.primary.dark,
     borderRadius: 60,
     justifyContent: "center",
     alignItems: "center",

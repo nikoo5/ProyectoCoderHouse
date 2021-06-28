@@ -56,7 +56,7 @@ const Post = (props) => {
           <Text style={styles.author}>{props.author}</Text>
           <Text style={styles.date}>{dateConvert(props.date)}</Text>
         </View>
-        <Text>{messageCleaner(props.message)}</Text>
+        <Text style={styles.message}>{messageCleaner(props.message)}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -69,9 +69,9 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     justifyContent: "flex-start",
-    alignItems: 'center',
+    alignItems: "center",
     marginLeft: 10,
-    marginVertical: 5
+    marginVertical: 5,
   },
   image: {
     width: 40,
@@ -93,11 +93,15 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   author: {
-    fontWeight: "bold",
+    fontFamily: "comfortaa-bold",
     fontSize: 16,
   },
   date: {
+    fontFamily: "comfortaa-light",
     fontSize: 10,
+  },
+  message: {
+    fontFamily: "comfortaa",
   },
   shadow: {
     shadowColor: "#000",

@@ -1,5 +1,6 @@
 import React from "react"
 import { StyleSheet, Text, TouchableOpacity } from "react-native"
+import Colors from "../constants/Colors";
 
 const ButtonPrimary = (props) => {
     const extraStyles = [];
@@ -22,7 +23,7 @@ const ButtonPrimary = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#7B1FA2",
+    backgroundColor: Colors.primary.dark,
     borderRadius: 5,
     padding: 10,
     justifyContent: "center",
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#FFFFFF",
+    fontFamily: "comfortaa"
   },
   shadow: {
     shadowColor: "#000",

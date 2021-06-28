@@ -26,12 +26,12 @@ const ModalAdd = (props) => {
           <View style={styles.buttonsContainer}>
             <ButtonSecondary
               text="CANCELAR"
-              width={100}
+              width={110}
               onPress={props.onCancel}
             />
             <ButtonPrimary
               text="ENVIAR"
-              width={100}
+              width={110}
               onPress={() => handleConfirm(message)}
             />
           </View>
@@ -49,13 +49,14 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    height: 110,
+    height: 120,
     marginBottom: 10,
     padding: 10,
     textAlign: "left",
     textAlignVertical: "top",
     borderRadius: 5,
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#FFFFFF",
+    fontFamily: "comfortaa"
   },
   buttonsContainer: {
     width: "100%",

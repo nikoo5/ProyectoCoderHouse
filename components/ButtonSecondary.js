@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import Colors from '../constants/Colors'
 import ButtonPrimary from './ButtonPrimary'
 
 const ButtonSecondary = (props) => {
@@ -10,7 +11,7 @@ const ButtonSecondary = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#616161",
+    backgroundColor: Colors.secondary.dark,
   },
 });
 
