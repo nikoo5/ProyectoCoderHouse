@@ -9,4 +9,7 @@ export default {
     light: "#E0E0E0",
     dark: "#616161",
   },
+  red: {
+    900: "#B71C1C",
+  },
 };

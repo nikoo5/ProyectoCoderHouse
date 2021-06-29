@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Moment from 'moment';
+import Styles from "../../constants/Styles";
+import Card from '../Card';
+import HEART from "../../assets/icons/regular/heart.svg";
+import HEART_SOLID from "../../assets/icons/solid/heart.svg";
+import COMMENT from "../../assets/icons/regular/comment.svg";
+import TRASH from "../../assets/icons/regular/trash.svg";
+import Colors from '../../constants/Colors';
 
 const Post = (props) => {
+  const [isFavorite, setIsFavorite] = useState(props.favorite);
+
   const dateConvert = (date) => {
     let dt = new Date();
     let dtPost = new Date(date);
@@ -35,30 +44,77 @@ const Post = (props) => {
     return tmp;
   };
 
-  const handleSelectItem = (postId) => {
-    props.onSelected(postId);
+  const handleSelectItem = () => {
+    if(props.onSelected) {
+      props.onSelected(props.id);
+    }
+  }
+
+  const handleActionButtons = () => {
+    if(props.onSelect) {
+      if (props.selectedId === props.id) {
+        props.onSelect("");
+      } else {
+        props.onSelect(props.id);
+      }
+    }
+  }
+
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  }
+
+  const handleComment = () => {
+  };
+
+  const actionButton = () => {
+    let heart = <HEART width={24} height={24} fill={Colors.secondary.main} />;
+    if(isFavorite) {
+      heart = <HEART_SOLID width={24} height={24} fill={Colors.red[900]} />;
+    }
+
+
+    if (props.id === props.selectedId)
+      return (
+        <View style={styles.acctionsContainer}>
+          <TouchableOpacity activeOpacity={0.7} onPress={handleFavorite}>
+            {heart}
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.7} onPress={handleComment}>
+            <COMMENT width={24} height={24} fill={Colors.secondary.main} />
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.7} onPress={handleSelectItem}>
+            <TRASH width={24} height={24} fill={Colors.red[900]} />
+          </TouchableOpacity>
+        </View>
+      );
   }
 
   return (
-    <TouchableOpacity
-      style={styles.post}
-      activeOpacity={0.9}
-      delayPressIn={0}
-      onLongPress={() => {
-        handleSelectItem(props.id);
-      }}
-    >
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: props.image }} />
-      </View>
-      <View style={[styles.dataContainer, styles.shadow]}>
-        <View style={styles.infoContainer}>
-          <Text style={styles.author}>{props.author}</Text>
-          <Text style={styles.date}>{dateConvert(props.date)}</Text>
+    <>
+      <TouchableOpacity
+        style={styles.post}
+        activeOpacity={1}
+        delayPressIn={0}
+        onPress={handleActionButtons}
+      >
+        <Card style={styles.image}>
+          <Image style={styles.image} source={{ uri: props.image }} />
+        </Card>
+        <View style={styles.card}>
+          <Card style={styles.card}>
+            <View style={styles.infoContainer}>
+              <Text style={styles.author}>{props.author}</Text>
+              <Text style={styles.date}>{dateConvert(props.date)}</Text>
+            </View>
+            <Text style={styles.dataContainer}>
+              {messageCleaner(props.message)}
+            </Text>
+            {actionButton()}
+          </Card>
         </View>
-        <Text style={styles.message}>{messageCleaner(props.message)}</Text>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </>
   );
 };
 
@@ -67,30 +123,25 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
   },
-  imageContainer: {
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginLeft: 10,
-    marginVertical: 5,
+  card: {
+    flex: 1,
   },
   image: {
+    padding: 0,
     width: 40,
     height: 40,
     borderRadius: 40,
-  },
-  dataContainer: {
-    flex: 1,
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: "#FFFFFF",
-    marginHorizontal: 10,
-    marginVertical: 5,
   },
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 5,
+  },
+  acctionsContainer: {
+    marginTop: 5,
+    flexDirection: "row",
+    justifyContent: 'space-around'
   },
   author: {
     fontFamily: "comfortaa-bold",
@@ -102,17 +153,7 @@ const styles = StyleSheet.create({
   },
   message: {
     fontFamily: "comfortaa",
-  },
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
+  }
 });
 
 export default Post;

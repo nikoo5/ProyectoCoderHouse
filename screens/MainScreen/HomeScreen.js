@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { FlatList, StyleSheet } from 'react-native';
+import { BackHandler, FlatList, StyleSheet } from 'react-native';
 import FloatingPlusButton from '../../components/FloatingPlusButton';
 import ModalAdd from '../../components/homeScreen/ModalAdd';
 import ModalDelete from '../../components/homeScreen/ModalDelete';
 import Post from '../../components/homeScreen/Post';
-import Colors from '../../constants/Colors';
 import InfoIni, {author_coder} from '../../constants/InfoIni';
 
 const HomeScreen = (props) => {
     const [modalAddVisible, setModalAddVisible] = useState(false);
     const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
-    const [selectedPost, setSelectedPost] = useState({ author: { name: "" } });
+    const [selectedId, setSelectedId] = useState("");
+    const [selectedPost, setSelectedPost] = useState({ id: "", author: { name: "" } });
 
     const [listPosts, setListPosts] = useState(InfoIni);
 
@@ -31,6 +31,7 @@ const HomeScreen = (props) => {
             author: author_coder,
             date: new Date(),
             message: message,
+            favorite: false
           },
           ...listPosts,
         ]);
@@ -76,10 +77,13 @@ const HomeScreen = (props) => {
             return (
               <Post
                 id={data.item.id}
+                favorite={data.item.favorite}
                 image={data.item.author.image}
                 author={data.item.author.name}
                 date={data.item.date}
                 message={data.item.message}
+                selectedId={selectedId}
+                onSelect={setSelectedId}
                 onSelected={() => {
                   handleModalDelete(data.item);
                 }}
@@ -87,7 +91,7 @@ const HomeScreen = (props) => {
             );
           }}
         />
-        <FloatingPlusButton right={20} bottom={80} onPress={handleModalAdd} />
+        <FloatingPlusButton right={20} bottom={20} onPress={handleModalAdd} />
       </>
     );
 }
@@ -96,7 +100,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: Colors.secondary.light,
   },
 });
 

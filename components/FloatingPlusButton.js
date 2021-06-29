@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity} from "react-native";
-import PLUS from "../assets/icons/plus.svg";
+import PLUS from "../assets/icons/solid/plus.svg";
 import Colors from "../constants/Colors";
 
 const FloatingPlusButton = (props) => {

@@ -1,27 +1,38 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-import HEART from "../assets/icons/heart.svg";
-import HOME from "../assets/icons/home.svg"
-import USER from "../assets/icons/user.svg";
+import HEART from "../assets/icons/solid/heart.svg";
+import HOME from "../assets/icons/solid/home.svg"
+import USER from "../assets/icons/solid/user.svg";
 import Colors from "../constants/Colors";
 
 const BottomBar = (props) => {
   return (
     <View style={styles.bottomBar}>
-      {/* <TouchableOpacity style={styles.button} activeOpacity={0.7} delayPressIn={0}>
-        <HEART width="100%" height={36} fill="#FFFFFF" />
-      </TouchableOpacity> */}
       <TouchableOpacity
         style={styles.button}
         activeOpacity={0.7}
         delayPressIn={0}
+        onPress={props.onFavPress}
+      >
+        <HEART width="100%" height={36} fill="#FFFFFF" />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.7}
+        delayPressIn={0}
+        onPress={props.onHomePress}
       >
         <HOME width="100%" height={36} fill="#FFFFFF" />
       </TouchableOpacity>
-      {/* <TouchableOpacity style={styles.button} activeOpacity={0.7} delayPressIn={0}>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.7}
+        delayPressIn={0}
+        onPress={props.onUserPress}
+      >
         <USER width="100%" height={36} fill="#FFFFFF" />
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 };
