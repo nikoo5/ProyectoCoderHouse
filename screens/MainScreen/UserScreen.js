@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Card from '../../components/Card';
 import { author_coder } from '../../constants/InfoIni';
 import Styles from "../../constants/Styles";
@@ -7,6 +7,14 @@ import CAMERA from "../../assets/icons/solid/camera.svg";
 import Colors from '../../constants/Colors';
 
 const UserScreen = (props) => {
+  const handleChangePicture = () => {
+    Alert.alert(
+      "No implementado",
+      "Característica de cambio de imagen para implementar en un futuro",
+      [{ text: "OK" }]
+    );
+  }
+
     return (
       <View style={styles.screenContainer}>
         <View style={{ ...styles.profileImage, ...Styles.shadow }}>
@@ -17,6 +25,7 @@ const UserScreen = (props) => {
           <TouchableOpacity
             activeOpacity={0.9}
             style={{ ...styles.editButton, ...Styles.shadow }}
+            onPress={handleChangePicture}
           >
             <CAMERA width={20} height={20} fill="#000" />
           </TouchableOpacity>

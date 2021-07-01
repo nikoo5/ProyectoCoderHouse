@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Moment from 'moment';
 import Styles from "../../constants/Styles";
 import Card from '../Card';
@@ -33,7 +33,7 @@ const Post = (props) => {
       return `Hace ${Math.floor(seconds / (60 * 60)).toString()} horas`;
     }    
 
-    return Moment(dt).format("DD/MM/yyyy");
+    return Moment(dtPost).format("DD/MM/yyyy");
   };  
 
   const messageCleaner = (msg) => {
@@ -65,6 +65,11 @@ const Post = (props) => {
   }
 
   const handleComment = () => {
+    Alert.alert(
+      "No implementado",
+      "Característica de comentarios a implementar en un futuro",
+      [{ text: "OK" }]
+    );
   };
 
   const actionButton = () => {
