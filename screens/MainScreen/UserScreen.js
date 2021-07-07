@@ -1,10 +1,10 @@
 import React from 'react'
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Card from '../../components/Card';
-import { author_coder } from '../../constants/InfoIni';
+import { author_coder } from '../../data/posts';
 import Styles from "../../constants/Styles";
-import CAMERA from "../../assets/icons/solid/camera.svg";
 import Colors from '../../constants/Colors';
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const UserScreen = (props) => {
   const handleChangePicture = () => {
@@ -27,7 +27,7 @@ const UserScreen = (props) => {
             style={{ ...styles.editButton, ...Styles.shadow }}
             onPress={handleChangePicture}
           >
-            <CAMERA width={20} height={20} fill="#000" />
+            <FontAwesome5 name="camera" color="#000000" size={20} />
           </TouchableOpacity>
         </View>
         <Card style={styles.cardContainer}>

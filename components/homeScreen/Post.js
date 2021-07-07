@@ -3,11 +3,8 @@ import { Alert, Button, Image, StyleSheet, Text, TouchableOpacity, View } from '
 import Moment from 'moment';
 import Styles from "../../constants/Styles";
 import Card from '../Card';
-import HEART from "../../assets/icons/regular/heart.svg";
-import HEART_SOLID from "../../assets/icons/solid/heart.svg";
-import COMMENT from "../../assets/icons/regular/comment.svg";
-import TRASH from "../../assets/icons/regular/trash.svg";
 import Colors from '../../constants/Colors';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Post = (props) => {
   const [isFavorite, setIsFavorite] = useState(props.favorite);
@@ -73,23 +70,32 @@ const Post = (props) => {
   };
 
   const actionButton = () => {
-    let heart = <HEART width={24} height={24} fill={Colors.secondary.main} />;
-    if(isFavorite) {
-      heart = <HEART_SOLID width={24} height={24} fill={Colors.red[900]} />;
-    }
-
-
     if (props.id === props.selectedId)
       return (
         <View style={styles.acctionsContainer}>
           <TouchableOpacity activeOpacity={0.7} onPress={handleFavorite}>
-            {heart}
+            <FontAwesome5
+              name="heart"
+              size={20}
+              color={isFavorite ? Colors.red[900] : Colors.secondary.main}
+              solid={isFavorite}
+            />
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.7} onPress={handleComment}>
-            <COMMENT width={24} height={24} fill={Colors.secondary.main} />
+            <FontAwesome5
+              name="comment"
+              size={20}
+              color={Colors.secondary.main}
+              regular={true}
+            />
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.7} onPress={handleSelectItem}>
-            <TRASH width={24} height={24} fill={Colors.red[900]} />
+            <FontAwesome5
+              name="trash-alt"
+              size={20}
+              color={Colors.red[900]}
+              regular={true}
+            />
           </TouchableOpacity>
         </View>
       );

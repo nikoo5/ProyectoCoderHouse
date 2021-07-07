@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import AppLoading from "expo-app-loading";
 import MainScreen from './screens/MainScreen';
-import { styleSheets } from 'min-document';
 import Colors from './constants/Colors';
 import { useFonts } from 'expo-font';
 

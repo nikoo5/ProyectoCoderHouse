@@ -22,9 +22,63 @@ export { author_me, author_coder };
 export default [
   {
     author: author_me,
+    date: "2021-07-07T04:42:23.081Z",
+    favorite: false,
+    id: "e306ff9d-31ca-4eb2-81b0-398cab934cc3",
+    message: "---------------------\r\nDESAFÍO 03\r\n---------------------",
+  },
+  {
+    author: author_me,
+    date: "2021-07-07T04:42:18.998Z",
+    favorite: false,
+    id: "c3adb8ec-a156-4119-8d6c-630cb958ac45",
+    message: "Hola Coder!",
+  },
+  {
+    author: author_coder,
+    date: "2021-07-07T04:42:15.916Z",
+    favorite: false,
+    id: "9d2ed111-9951-4f5c-990e-ba377c5a028f",
+    message:
+      "Para este desafío no hay muchos cambios visuales, pero si lógicos.",
+  },
+  {
+    author: author_me,
+    date: "2021-07-07T04:42:12.832Z",
+    favorite: false,
+    id: "e96bd23a-65d2-4c95-a073-5b9787bb98fa",
+    message:
+      "Se reemplazaron los componentes Header y BottomBar para utilizar la navegación nativa de React",
+  },
+  {
+    author: author_coder,
+    date: "2021-07-07T04:42:09.966Z",
+    favorite: false,
+    id: "5cad75b9-e460-4a96-b9d4-d67da91cef76",
+    message:
+      "Para poder tener un Header, primero se necesitó agregar un StackNavigator",
+  },
+  {
+    author: author_coder,
+    date: "2021-07-07T04:42:06.632Z",
+    favorite: false,
+    id: "dcff57d5-e0c0-4664-9e25-fd5faf2a9149",
+    message:
+      "Y luego dentro de ese Stack, un TabNavigator.\r\nDe esta forma se logró mantener la estética pero utilizar la navegación deseada.",
+  },
+  {
+    author: author_coder,
+    date: "2021-07-07T04:42:05.632Z",
+    favorite: false,
+    id: "dcff57d5-e0c0-4664-9e25-fd5faf2a9148",
+    message:
+      "Saludos!!",
+  },
+  {
+    author: author_me,
     date: "2021-06-29T00:00:11.000Z",
     id: "009c3373-be69-4118-b8a2-a4ba78adfcay",
-    message: "---------------------\r\nDESAFIO 02\r\n---------------------",
+    message: "---------------------\r\nDESAFÍO 02\r\n---------------------",
     favorite: false,
   },
   {

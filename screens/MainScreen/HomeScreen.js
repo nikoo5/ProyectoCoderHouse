@@ -4,7 +4,7 @@ import FloatingPlusButton from '../../components/FloatingPlusButton';
 import ModalAdd from '../../components/homeScreen/ModalAdd';
 import ModalDelete from '../../components/homeScreen/ModalDelete';
 import Post from '../../components/homeScreen/Post';
-import InfoIni, {author_coder} from '../../constants/InfoIni';
+import InfoIni, {author_coder} from '../../data/posts';
 
 const HomeScreen = (props) => {
     const [modalAddVisible, setModalAddVisible] = useState(false);

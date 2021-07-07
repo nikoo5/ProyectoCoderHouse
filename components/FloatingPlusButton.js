@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity} from "react-native";
-import PLUS from "../assets/icons/solid/plus.svg";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Colors from "../constants/Colors";
 
 const FloatingPlusButton = (props) => {
@@ -24,7 +24,7 @@ const FloatingPlusButton = (props) => {
       onPress={props.onPress}
       delayPressIn={0}
     >
-      <PLUS width="100%" height={36} fill="#FFFFFF" />
+      <FontAwesome5 name="plus" color="#FFFFFF" size={30} />
     </TouchableOpacity>
   );
 };

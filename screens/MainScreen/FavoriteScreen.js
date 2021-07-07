@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FlatList, StyleSheet } from 'react-native';
 import Post from '../../components/homeScreen/Post';
-import InfoIni from '../../constants/InfoIni';
+import InfoIni from '../../data/posts';
 
 const FavoriteScreen = (props) => {
     const [listPosts, setListPosts] = useState(InfoIni.filter(x => x.favorite));
