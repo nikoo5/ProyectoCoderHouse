@@ -22,6 +22,44 @@ export { author_me, author_coder };
 export default [
   {
     author: author_me,
+    date: "2021-07-20T22:13:27.417Z",
+    favorite: false,
+    id: "3c36e529-b77d-4572-9574-23698affe6d2",
+    message: "---------------------\r\nDESAFÍO 04\r\n---------------------",
+  },
+  {
+    author: author_coder,
+    date: "2021-07-20T22:13:18.582Z",
+    favorite: false,
+    id: "edd82d74-e911-467b-a66f-a1735c649de7",
+    message:
+      "Hola Coder!\r\nPara este desafío se implemento Redux junto a React-Redux!",
+  },
+  {
+    author: author_coder,
+    date: "2021-07-20T22:12:54.816Z",
+    favorite: false,
+    id: "03498443-cdfb-489e-910a-9add5d6e2e26",
+    message:
+      "Ademas para poder utilizar combinaciones de reducers, se agregó una nueva vista de Comentarios.",
+  },
+  {
+    author: author_me,
+    date: "2021-07-20T22:12:26.216Z",
+    favorite: true,
+    id: "cc1a355d-beed-4f10-9ec7-9a05a1f88cd6",
+    message:
+      "Haciendo TAP sobre este post, y yendo al icono de comentarios, podrán ver los mensajes de este post!",
+  },
+  {
+    author: author_me,
+    date: "2021-07-20T22:12:15.800Z",
+    favorite: false,
+    id: "03516872-18f4-4cb2-bbc5-b2bdaa94b5f6",
+    message: "Saludos!!",
+  },
+  {
+    author: author_me,
     date: "2021-07-07T04:42:23.081Z",
     favorite: false,
     id: "e306ff9d-31ca-4eb2-81b0-398cab934cc3",
@@ -71,8 +109,7 @@ export default [
     date: "2021-07-07T04:42:05.632Z",
     favorite: false,
     id: "dcff57d5-e0c0-4664-9e25-fd5faf2a9148",
-    message:
-      "Saludos!!",
+    message: "Saludos!!",
   },
   {
     author: author_me,

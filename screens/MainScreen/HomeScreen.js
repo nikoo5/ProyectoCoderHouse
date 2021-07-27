@@ -1,61 +1,63 @@
-import React, { useState } from 'react'
-import { BackHandler, FlatList, StyleSheet } from 'react-native';
-import FloatingPlusButton from '../../components/FloatingPlusButton';
-import ModalAdd from '../../components/homeScreen/ModalAdd';
-import ModalDelete from '../../components/homeScreen/ModalDelete';
-import Post from '../../components/homeScreen/Post';
-import InfoIni, {author_coder} from '../../data/posts';
+import React, { useState, useEffect } from "react";
+import { FlatList, StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import FloatingPlusButton from "../../components/FloatingPlusButton";
+import ModalAdd from "../../components/homeScreen/ModalAdd";
+import ModalDelete from "../../components/homeScreen/ModalDelete";
+import Post from "../../components/homeScreen/Post";
+import { selectPost, addPost, deletePost } from "../../store/actions/posts.actions";
 
-const HomeScreen = (props) => {
-    const [modalAddVisible, setModalAddVisible] = useState(false);
-    const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
-    const [selectedId, setSelectedId] = useState("");
-    const [selectedPost, setSelectedPost] = useState({ id: "", author: { name: "" } });
+const HomeScreen = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+  const listPosts = useSelector((state) => state.posts.list);
+  const selectedPost = useSelector((state) => state.posts.selected) || {
+    id: "",
+    author: {
+      name: ""
+    }
+  };
 
-    const [listPosts, setListPosts] = useState(InfoIni);
+  const [modalAddVisible, setModalAddVisible] = useState(false);
+  const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
 
-    const handleModalAdd = () => {
-      setModalAddVisible(true);
-    };
-    const handleCancelAdd = () => {
-      setModalAddVisible(false);
-    };
-    const handleConfirmAdd = (message) => {
-      if (message.trim() != "") {
-        let uuid = require("uuid");
-        let newId = uuid.v4();
+  const handleSelectPost = (postId) => {
+    dispatch(selectPost(postId));
+  };
 
-        setListPosts([
-          {
-            id: newId,
-            author: author_coder,
-            date: new Date(),
-            message: message,
-            favorite: false
-          },
-          ...listPosts,
-        ]);
-      }
-      setModalAddVisible(false);
-    };
+  const handleModalAdd = () => {
+    setModalAddVisible(true);
+  };
+  const handleCancelAdd = () => {
+    setModalAddVisible(false);
+  };
+  const handleConfirmAdd = (message) => {
+    if (message.trim() != "") {
+      dispatch(addPost(message.trim()));
+    }
+    setModalAddVisible(false);
+  };
 
-    const handleModalDelete = (post) => {
-      setSelectedPost(post);
-      setModalDeleteVisible(true);
-    };
+  const handleModalDelete = (post) => {
+    dispatch(selectPost(post.id));
+    setModalDeleteVisible(true);
+  };
 
-    const handleCancelDelete = () => {
-      setModalDeleteVisible(false);
-    };
+  const handleCancelDelete = () => {
+    setModalDeleteVisible(false);
+  };
 
-    const handleConfirmDelete = (postId) => {
-      setModalDeleteVisible(false);
-      setListPosts(listPosts.filter((x) => x.id != postId));
-    };
+  const handleConfirmDelete = (postId) => {
+    dispatch(deletePost(postId));
+    setModalDeleteVisible(false);
+  };
 
-    return (
-      <>
-        <ModalAdd
+  const handleCommentPress = (postId) => {
+    navigation.navigate("CommentScreen", { postId: postId });
+  }
+
+  return (
+    <>
+      <ModalAdd
           visible={modalAddVisible}
           onCancel={handleCancelAdd}
           onConfirm={handleConfirmAdd}
@@ -68,8 +70,8 @@ const HomeScreen = (props) => {
           postId={selectedPost.id}
           authorName={selectedPost.author.name}
         />
-        
-        <FlatList
+
+      <FlatList
           style={styles.mainContainer}
           data={listPosts}
           keyExtractor={(x) => x.id}
@@ -82,19 +84,20 @@ const HomeScreen = (props) => {
                 author={data.item.author.name}
                 date={data.item.date}
                 message={data.item.message}
-                selectedId={selectedId}
-                onSelect={setSelectedId}
+                selectedId={selectedPost.id}
+                onSelect={handleSelectPost}
                 onSelected={() => {
                   handleModalDelete(data.item);
                 }}
+                onCommentPress={handleCommentPress}
               />
             );
           }}
         />
-        <FloatingPlusButton right={20} bottom={20} onPress={handleModalAdd} />
-      </>
-    );
-}
+      <FloatingPlusButton right={20} bottom={20} onPress={handleModalAdd} />
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   mainContainer: {

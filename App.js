@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import AppLoading from "expo-app-loading";
-import MainScreen from './screens/MainScreen';
+import AppNavigator from './navigation'
 import Colors from './constants/Colors';
 import { useFonts } from 'expo-font';
+import { Provider } from 'react-redux';
+import store from './store';
 
 export default function App() {
   const [loaded, _] = useFonts({
@@ -23,11 +25,13 @@ export default function App() {
   }
 
   return (
-    <View style={styles.app}>
-      <SafeAreaView style={styles.safeArea}>
-        <MainScreen />
-      </SafeAreaView>
-    </View>
+    <Provider store={store}>
+      <View style={styles.app}>
+        <SafeAreaView style={styles.safeArea}>
+          <AppNavigator />
+        </SafeAreaView>
+      </View>
+    </Provider>
   );
 }
 

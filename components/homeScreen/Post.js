@@ -5,9 +5,11 @@ import Styles from "../../constants/Styles";
 import Card from '../Card';
 import Colors from '../../constants/Colors';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleFavorite } from '../../store/actions/posts.actions';
 
 const Post = (props) => {
-  const [isFavorite, setIsFavorite] = useState(props.favorite);
+  const dispatch = useDispatch()
 
   const dateConvert = (date) => {
     let dt = new Date();
@@ -58,27 +60,23 @@ const Post = (props) => {
   }
 
   const handleFavorite = () => {
-    setIsFavorite(!isFavorite);
+    dispatch(toggleFavorite(props.id))
   }
 
   const handleComment = () => {
-    Alert.alert(
-      "No implementado",
-      "Característica de comentarios a implementar en un futuro",
-      [{ text: "OK" }]
-    );
+    props.onCommentPress(props.id);
   };
 
   const actionButton = () => {
     if (props.id === props.selectedId)
       return (
-        <View style={styles.acctionsContainer}>
+        <View style={styles.actionsContainer}>
           <TouchableOpacity activeOpacity={0.7} onPress={handleFavorite}>
             <FontAwesome5
               name="heart"
               size={20}
-              color={isFavorite ? Colors.red[900] : Colors.secondary.main}
-              solid={isFavorite}
+              color={props.favorite ? Colors.red[900] : Colors.secondary.main}
+              solid={props.favorite}
             />
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.7} onPress={handleComment}>
@@ -102,30 +100,28 @@ const Post = (props) => {
   }
 
   return (
-    <>
-      <TouchableOpacity
-        style={styles.post}
-        activeOpacity={1}
-        delayPressIn={0}
-        onPress={handleActionButtons}
-      >
-        <Card style={styles.image}>
-          <Image style={styles.image} source={{ uri: props.image }} />
+    <TouchableOpacity
+      style={styles.post}
+      activeOpacity={1}
+      delayPressIn={0}
+      onPress={handleActionButtons}
+    >
+      <Card style={styles.image}>
+        <Image style={styles.image} source={{ uri: props.image }} />
+      </Card>
+      <View style={styles.container}>
+        <Card style={styles.card}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.author}>{props.author}</Text>
+            <Text style={styles.date}>{dateConvert(props.date)}</Text>
+          </View>
+          <View style={styles.dataContainer}>
+            <Text>{messageCleaner(props.message)}</Text>
+          </View>
+          {actionButton()}
         </Card>
-        <View style={styles.card}>
-          <Card style={styles.card}>
-            <View style={styles.infoContainer}>
-              <Text style={styles.author}>{props.author}</Text>
-              <Text style={styles.date}>{dateConvert(props.date)}</Text>
-            </View>
-            <Text style={styles.dataContainer}>
-              {messageCleaner(props.message)}
-            </Text>
-            {actionButton()}
-          </Card>
-        </View>
-      </TouchableOpacity>
-    </>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -134,8 +130,12 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
   },
+  container: {
+    width: "100%",
+    paddingRight: 80,
+  },
   card: {
-    flex: 1,
+    width: "100%",
   },
   image: {
     padding: 0,
@@ -144,15 +144,15 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   infoContainer: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 5,
   },
-  acctionsContainer: {
+  actionsContainer: {
     marginTop: 5,
     flexDirection: "row",
-    justifyContent: 'space-around'
+    justifyContent: "space-around",
   },
   author: {
     fontFamily: "comfortaa-bold",
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   message: {
     fontFamily: "comfortaa",
-  }
+  },
 });
 
 export default Post;
