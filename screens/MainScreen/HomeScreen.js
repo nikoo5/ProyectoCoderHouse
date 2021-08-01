@@ -5,7 +5,11 @@ import FloatingPlusButton from "../../components/FloatingPlusButton";
 import ModalAdd from "../../components/homeScreen/ModalAdd";
 import ModalDelete from "../../components/homeScreen/ModalDelete";
 import Post from "../../components/homeScreen/Post";
-import { selectPost, addPost, deletePost } from "../../store/actions/posts.actions";
+import {
+  selectPost,
+  addPost,
+  deletePost,
+} from "../../store/actions/posts.actions";
 
 const HomeScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -13,8 +17,8 @@ const HomeScreen = ({ navigation, route }) => {
   const selectedPost = useSelector((state) => state.posts.selected) || {
     id: "",
     author: {
-      name: ""
-    }
+      name: "",
+    },
   };
 
   const [modalAddVisible, setModalAddVisible] = useState(false);
@@ -53,47 +57,47 @@ const HomeScreen = ({ navigation, route }) => {
 
   const handleCommentPress = (postId) => {
     navigation.navigate("CommentScreen", { postId: postId });
-  }
+  };
 
   return (
     <>
       <ModalAdd
-          visible={modalAddVisible}
-          onCancel={handleCancelAdd}
-          onConfirm={handleConfirmAdd}
-        />
+        visible={modalAddVisible}
+        onCancel={handleCancelAdd}
+        onConfirm={handleConfirmAdd}
+      />
 
-        <ModalDelete
-          visible={modalDeleteVisible}
-          onCancel={handleCancelDelete}
-          onConfirm={handleConfirmDelete}
-          postId={selectedPost.id}
-          authorName={selectedPost.author.name}
-        />
+      <ModalDelete
+        visible={modalDeleteVisible}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        postId={selectedPost.id}
+        authorName={selectedPost.author.name}
+      />
 
       <FlatList
-          style={styles.mainContainer}
-          data={listPosts}
-          keyExtractor={(x) => x.id}
-          renderItem={(data) => {
-            return (
-              <Post
-                id={data.item.id}
-                favorite={data.item.favorite}
-                image={data.item.author.image}
-                author={data.item.author.name}
-                date={data.item.date}
-                message={data.item.message}
-                selectedId={selectedPost.id}
-                onSelect={handleSelectPost}
-                onSelected={() => {
-                  handleModalDelete(data.item);
-                }}
-                onCommentPress={handleCommentPress}
-              />
-            );
-          }}
-        />
+        style={styles.mainContainer}
+        data={listPosts}
+        keyExtractor={(x) => x.id}
+        renderItem={(data) => {
+          return (
+            <Post
+              id={data.item.id}
+              favorite={data.item.favorite}
+              image={data.item.author.image}
+              author={data.item.author.name}
+              date={data.item.date}
+              message={data.item.message}
+              selectedId={selectedPost.id}
+              onSelect={handleSelectPost}
+              onSelected={() => {
+                handleModalDelete(data.item);
+              }}
+              onCommentPress={handleCommentPress}
+            />
+          );
+        }}
+      />
       <FloatingPlusButton right={20} bottom={20} onPress={handleModalAdd} />
     </>
   );

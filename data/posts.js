@@ -21,6 +21,37 @@ export { author_me, author_coder };
 
 export default [
   {
+    author: author_coder,
+    date: "2021-07-29T23:41:11.991Z",
+    favorite: false,
+    id: "25e841bd-b3ac-4010-86b6-011fa8fdc977",
+    message: "---------------------\r\nDESAFÍO 05\r\n---------------------",
+  },
+  {
+    author: author_me,
+    date: "2021-07-29T23:40:45.302Z",
+    favorite: false,
+    id: "a23beb79-fe69-42ef-9d77-4145af5d0955",
+    message:
+      "Hola Coder\r\nPara este desafio era necesario implementar la BottomBar, pero ya había sido implementada previamente.",
+  },
+  {
+    author: author_coder,
+    date: "2021-07-29T23:40:00.499Z",
+    favorite: false,
+    id: "aa2cf227-019d-45d7-a7d2-c44556a994f0",
+    message:
+      "Por lo tanto se refactorizo la navegación, mejorandola como se enseñó en la clase",
+  },
+  {
+    author: author_coder,
+    date: "2021-07-29T23:39:07.593Z",
+    favorite: false,
+    id: "1bbb56a1-89a0-407c-93f1-a05990461617",
+    message:
+      "Y ademas se agregó la pantalla de login, aunque faltaria agregar el registro para la proxima version.",
+  },
+  {
     author: author_me,
     date: "2021-07-20T22:13:27.417Z",
     favorite: false,

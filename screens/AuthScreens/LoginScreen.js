@@ -85,7 +85,6 @@ const LoginScreen = () => {
   );
 
   const handlerLogin = async () => {
-    console.log(formState);
     try {
       if (formState.formIsValid) {
         await dispatch(
