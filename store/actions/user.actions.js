@@ -5,6 +5,7 @@ import { User } from "../../models/user";
 
 export const LOAD_USER = "LOAD_USER";
 export const SET_USER_NAME = "SET_USER_NAME";
+export const SET_USER_IMAGE = "SET_USER_IMAGE";
 
 export const loadUser = (uid, token) => {
   return async (dispatch) => {
@@ -22,6 +23,30 @@ export const loadUser = (uid, token) => {
 
     const data = await response.json();
     dispatch({ type: LOAD_USER, user: User.fromJson(data) });
+  };
+};
+
+export const setUserImage = (auth, uri) => {
+  return async (dispatch) => {
+    const response = await fetch(
+      `${URL_DATABASE}/users/${auth.user}.json?auth=${auth.token}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          profileImage: uri,
+        }),
+      }
+    );
+
+    if (!response.ok) throw new Error("No se pudo actualizar el usuario");
+
+    dispatch({
+      type: SET_USER_IMAGE,
+      image: uri,
+    });
   };
 };
 
