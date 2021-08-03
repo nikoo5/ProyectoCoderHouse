@@ -14,6 +14,7 @@ import Styles from "../../constants/Styles";
 import ButtonPrimary from "../../components/ButtonPrimary";
 import { useDispatch, useSelector } from "react-redux";
 import { loginWithEmail } from "../../store/actions/auth.actions";
+import { useFocusEffect } from "@react-navigation/core";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -44,7 +45,7 @@ const formReducer = (state, action) => {
   return { ...state };
 };
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const bgImage = require("../../assets/img/bg.png");
   const logoImage = require("../../assets/img/knot_logo.png");
 
@@ -59,6 +60,14 @@ const LoginScreen = () => {
       Alert.alert("Ha ocurrido un error", error, [{ text: "Ok" }]);
     }
   }, [error]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      navigation.setOptions({ headerShown: false });
+
+      return () => null;
+    }, [])
+  );
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
@@ -86,7 +95,8 @@ const LoginScreen = () => {
 
   const handlerLogin = async () => {
     try {
-      if (formState.formIsValid) {
+      await dispatch(loginWithEmail(`coder@house.com`, "coder123"));
+      if (false && formState.formIsValid) {
         await dispatch(
           loginWithEmail(
             formState.inputValues.email,
@@ -105,6 +115,11 @@ const LoginScreen = () => {
       "Función no implementada por el momento, ingresar con los siguientes datos:\r\n\r\nEMAIL: coder@house.com\r\nCLAVE: coder123",
       [{ text: "Ok" }]
     );
+  };
+
+  const handleRegisterButton = () => {
+    navigation.setOptions({ headerShown: true });
+    navigation.navigate("RegisterUser");
   };
 
   return (
@@ -142,7 +157,7 @@ const LoginScreen = () => {
           />
           <ButtonPrimary text="INGRESAR" onPress={handlerLogin} />
           <View style={styles.buttonsContainer}>
-            <TouchableWithoutFeedback onPress={handlerNotImplemented}>
+            <TouchableWithoutFeedback onPress={handleRegisterButton}>
               <View>
                 <Text style={styles.textBold}>Registrarse</Text>
               </View>
