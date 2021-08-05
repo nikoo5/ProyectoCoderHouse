@@ -4,33 +4,43 @@ export const DELETE_POST = "DELETE_POST";
 export const TOGGLE_FAVORITE = "TOGGLE_FAVORITE";
 export const GET_FAVORITES = "GET_FAVORITES";
 
-import { author_coder } from "../../data/posts"
+import { author_coder } from "../../data/posts";
+import { insertNewKnot } from "../../db";
 
 export const selectPost = (id) => ({
-    type: SELECT_POST,
-    postID: id
-})
+  type: SELECT_POST,
+  postID: id,
+});
 
 export const addPost = (message) => {
-  const uuid = require("uuid");
-  const newId = uuid.v4();
+  return async (dispatch) => {
+    const uuid = require("uuid");
+    const newId = uuid.v4();
 
-  return {
-    type: ADD_POST,
-    postItem: {
-      id: newId,
-      author: author_coder,
-      date: new Date(),
-      message: message,
-      favorite: false,
-    },
+    const knot = await insertNewKnot(
+      author_coder,
+      author_coder.id,
+      newId,
+      message
+    );
+
+    dispatch({
+      type: ADD_POST,
+      postItem: {
+        id: newId,
+        author: author_coder,
+        date: new Date(),
+        message: message,
+        favorite: false,
+      },
+    });
   };
 };
 
 export const deletePost = (id) => ({
-    type: DELETE_POST,
-    postID: id
-})
+  type: DELETE_POST,
+  postID: id,
+});
 
 export const toggleFavorite = (id) => ({
   type: TOGGLE_FAVORITE,
@@ -39,5 +49,5 @@ export const toggleFavorite = (id) => ({
 });
 
 export const getFavorites = () => ({
-  type: GET_FAVORITES
-})
+  type: GET_FAVORITES,
+});

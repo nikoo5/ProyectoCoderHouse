@@ -6,14 +6,20 @@
 const author_me = {
   id: "52ab16cc-89af-403c-bbfd-3a68b4fd32ce",
   name: "Nicolás Filippi Farmar",
+  lastName: "",
   image:
+    "https://firebasestorage.googleapis.com/v0/b/homie-b5662.appspot.com/o/profile_pictures%2FeqgfQsrUqtTo8AaTS3nkS3Ca5G73%2FuHkw7gSphQlI.jpg?alt=media&token=d80d3722-5034-4e1b-ab25-7f2069da3b88",
+  profileImage:
     "https://firebasestorage.googleapis.com/v0/b/homie-b5662.appspot.com/o/profile_pictures%2FeqgfQsrUqtTo8AaTS3nkS3Ca5G73%2FuHkw7gSphQlI.jpg?alt=media&token=d80d3722-5034-4e1b-ab25-7f2069da3b88",
 };
 
 const author_coder = {
   id: "abf83175-2442-4023-bcf7-3266ff2cfd36",
   name: "Equipo CoderHouse",
+  lastName: "",
   image:
+    "https://firebasestorage.googleapis.com/v0/b/homie-b5662.appspot.com/o/profile_pictures%2FeqgfQsrUqtTo8AaTS3nkS3Ca5G73%2Fcoderhouse.jpg?alt=media&token=56d69811-7da4-43b0-8d38-22cc931ee325",
+  profileImage:
     "https://firebasestorage.googleapis.com/v0/b/homie-b5662.appspot.com/o/profile_pictures%2FeqgfQsrUqtTo8AaTS3nkS3Ca5G73%2Fcoderhouse.jpg?alt=media&token=56d69811-7da4-43b0-8d38-22cc931ee325",
 };
 

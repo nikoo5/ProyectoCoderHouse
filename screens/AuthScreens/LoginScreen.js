@@ -15,6 +15,7 @@ import ButtonPrimary from "../../components/ButtonPrimary";
 import { useDispatch, useSelector } from "react-redux";
 import { loginWithEmail } from "../../store/actions/auth.actions";
 import { useFocusEffect } from "@react-navigation/core";
+import { initDb, insertAuthor } from "../../db";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 

@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import React, { useState } from "react";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import AppLoading from "expo-app-loading";
-import AppNavigator from './navigation'
-import Colors from './constants/Colors';
-import { useFonts } from 'expo-font';
-import { Provider } from 'react-redux';
-import store from './store';
+import AppNavigator from "./navigation";
+import Colors from "./constants/Colors";
+import { useFonts } from "expo-font";
+import { Provider } from "react-redux";
+import store from "./store";
+import { cleanDb, fetchKnots, initDb, insertKnot, insertNewKnot } from "./db";
+
+initDb()
+  .then(() => {
+    console.log("DataBase Initialized");
+    // cleanDb().then(() => {
+    //   console.log("DataBase Reseted");
+    // });
+    fetchKnots().then((result) => {
+      console.log(result);
+    });
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
 
 export default function App() {
   const [loaded, _] = useFonts({
@@ -19,9 +34,7 @@ export default function App() {
   });
 
   if (!loaded) {
-    return (
-      <AppLoading />
-    );
+    return <AppLoading />;
   }
 
   return (
@@ -38,7 +51,7 @@ export default function App() {
 const styles = StyleSheet.create({
   app: {
     flex: 1,
-    backgroundColor: Colors.primary.main
+    backgroundColor: Colors.primary.main,
   },
   safeArea: {
     flex: 1,
