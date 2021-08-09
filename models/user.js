@@ -1,6 +1,7 @@
 export class User {
   constructor() {
-    (this.email = null),
+    (this.id = null),
+      (this.email = null),
       (this.name = null),
       (this.lastName = null),
       (this.profileImage = null),
@@ -12,7 +13,9 @@ export class User {
     return this.name + " " + this.lastName;
   }
 
-  static fromJson(json) {
-    return Object.assign(new User(), json);
+  static fromJson(id, json) {
+    const user = Object.assign(new User(), json);
+    user.id = id;
+    return user;
   }
 }

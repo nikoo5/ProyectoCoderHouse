@@ -5,20 +5,16 @@
 
 const author_me = {
   id: "52ab16cc-89af-403c-bbfd-3a68b4fd32ce",
-  name: "Nicolás Filippi Farmar",
-  lastName: "",
-  image:
-    "https://firebasestorage.googleapis.com/v0/b/homie-b5662.appspot.com/o/profile_pictures%2FeqgfQsrUqtTo8AaTS3nkS3Ca5G73%2FuHkw7gSphQlI.jpg?alt=media&token=d80d3722-5034-4e1b-ab25-7f2069da3b88",
+  name: "Nicolás",
+  lastName: "Filippi Farmar",
   profileImage:
     "https://firebasestorage.googleapis.com/v0/b/homie-b5662.appspot.com/o/profile_pictures%2FeqgfQsrUqtTo8AaTS3nkS3Ca5G73%2FuHkw7gSphQlI.jpg?alt=media&token=d80d3722-5034-4e1b-ab25-7f2069da3b88",
 };
 
 const author_coder = {
   id: "abf83175-2442-4023-bcf7-3266ff2cfd36",
-  name: "Equipo CoderHouse",
-  lastName: "",
-  image:
-    "https://firebasestorage.googleapis.com/v0/b/homie-b5662.appspot.com/o/profile_pictures%2FeqgfQsrUqtTo8AaTS3nkS3Ca5G73%2Fcoderhouse.jpg?alt=media&token=56d69811-7da4-43b0-8d38-22cc931ee325",
+  name: "Equipo",
+  lastName: "CoderHouse",
   profileImage:
     "https://firebasestorage.googleapis.com/v0/b/homie-b5662.appspot.com/o/profile_pictures%2FeqgfQsrUqtTo8AaTS3nkS3Ca5G73%2Fcoderhouse.jpg?alt=media&token=56d69811-7da4-43b0-8d38-22cc931ee325",
 };
@@ -26,6 +22,61 @@ const author_coder = {
 export { author_me, author_coder };
 
 export default [
+  {
+    author: author_me,
+    date: "2021-08-06T00:42:40.164Z",
+    favorite: false,
+    id: "4edbb689-0246-42eb-a285-55b98aaefbc2",
+    message: "---------------------\r\nDESAFÍO 06\r\n---------------------",
+  },
+  {
+    author: author_coder,
+    date: "2021-08-06T00:42:36.200Z",
+    favorite: false,
+    id: "43575304-a774-4ac0-96d4-9a19f8afe48f",
+    message:
+      "Hola Coder!\r\nPara este desafio se realizaron varias implementaciones, aunque queda por mejorar bastante la funcionalidad para la entrega final del proyecto.",
+  },
+  {
+    author: author_coder,
+    date: "2021-08-06T00:42:32.320Z",
+    favorite: false,
+    id: "3cc30466-4b17-404e-9c4e-4b0eb883b460",
+    message:
+      "Aunque para este desafio, cumple con los requisitos.\r\nPrimero se implemento la funcionalidad de cambiar la imagen de perfil desde la pantalla de Usuario.",
+  },
+  {
+    author: author_me,
+    date: "2021-08-06T00:42:27.730Z",
+    favorite: false,
+    id: "1c8b529f-0271-400d-99f1-b9fcb2f82e70",
+    message:
+      "Esta imagen es subida a la base de datos y guardada en forma local.",
+  },
+  {
+    author: author_me,
+    date: "2021-08-06T00:42:23.983Z",
+    favorite: false,
+    id: "062a1ee3-b94a-4454-8cc0-8c65954340b8",
+    message:
+      "Tambien de desarrollo la pantalla de registro, para creacion de cuentas nuevas.",
+  },
+  {
+    author: author_coder,
+    date: "2021-08-06T00:42:20.214Z",
+    favorite: false,
+    id: "98e889bb-870b-40fc-9434-29ea5046d0a4",
+    message:
+      "Ademas, se empezó a utilizar SQLite para la guardar los datos de forma local y no en estados, aunque esta opcion esta en desarrollo todavia.",
+  },
+  {
+    author: author_coder,
+    date: "2021-08-06T00:42:16.276Z",
+    favorite: false,
+    id: "ccb7b8cf-e2aa-48dd-8e90-96efe83522c1",
+    message:
+      "Por ultimo, se corrigieron los paquetes NPM para que no arroje problemas de fonts ni warning.\r\nSaludos!!",
+  },
   {
     author: author_coder,
     date: "2021-07-29T23:41:11.991Z",

@@ -2,13 +2,13 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 import AuthReducer from "./reducers/auth.reducer";
-import PostsReducer from "./reducers/posts.reducer";
+import KnotsReducer from "./reducers/knots.reducer";
 import CommentsReducer from "./reducers/comments.reducer";
 import UserReducer from "./reducers/user.reducer";
 
 const RootReducer = combineReducers({
   auth: AuthReducer,
-  posts: PostsReducer,
+  knots: KnotsReducer,
   comments: CommentsReducer,
   user: UserReducer,
 });

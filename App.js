@@ -6,7 +6,7 @@ import Colors from "./constants/Colors";
 import { useFonts } from "expo-font";
 import { Provider } from "react-redux";
 import store from "./store";
-import { cleanDb, fetchKnots, initDb, insertKnot, insertNewKnot } from "./db";
+import { cleanDb, initDb } from "./db";
 
 initDb()
   .then(() => {
@@ -14,9 +14,9 @@ initDb()
     // cleanDb().then(() => {
     //   console.log("DataBase Reseted");
     // });
-    fetchKnots().then((result) => {
-      console.log(result);
-    });
+    // fetchKnots().then((result) => {
+    //   console.log(result);
+    // });
   })
   .catch((err) => {
     console.log(err.message);

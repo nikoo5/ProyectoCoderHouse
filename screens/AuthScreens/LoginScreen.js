@@ -96,8 +96,10 @@ const LoginScreen = ({ navigation }) => {
 
   const handlerLogin = async () => {
     try {
-      await dispatch(loginWithEmail(`coder@house.com`, "coder123"));
-      if (false && formState.formIsValid) {
+      // if (formState.inputValues.email === "") {
+      //   await dispatch(loginWithEmail(`coder@house.com`, "coder123"));
+      // } else
+      if (formState.formIsValid) {
         await dispatch(
           loginWithEmail(
             formState.inputValues.email,

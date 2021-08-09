@@ -1,20 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Moment from 'moment';
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Moment from "moment";
 import Styles from "../../constants/Styles";
-import Card from '../Card';
-import Colors from '../../constants/Colors';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleFavorite } from '../../store/actions/posts.actions';
+import Card from "../Card";
+import Colors from "../../constants/Colors";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../../store/actions/knots.actions";
 
-const Post = (props) => {
-  const dispatch = useDispatch()
+const Knot = (props) => {
+  const dispatch = useDispatch();
 
   const dateConvert = (date) => {
     let dt = new Date();
-    let dtPost = new Date(date);
-    let seconds = (dt.getTime() - dtPost.getTime()) / 1000;
+    let dtKnot = new Date(date);
+    let seconds = (dt.getTime() - dtKnot.getTime()) / 1000;
 
     if (seconds < 5) {
       return "Ahora";
@@ -30,10 +38,10 @@ const Post = (props) => {
         return "Hace una hora";
       }
       return `Hace ${Math.floor(seconds / (60 * 60)).toString()} horas`;
-    }    
+    }
 
-    return Moment(dtPost).format("DD/MM/yyyy");
-  };  
+    return Moment(dtKnot).format("DD/MM/yyyy");
+  };
 
   const messageCleaner = (msg) => {
     let tmp = msg;
@@ -44,27 +52,38 @@ const Post = (props) => {
   };
 
   const handleSelectItem = () => {
-    if(props.onSelected) {
+    if (props.onSelected) {
       props.onSelected(props.id);
     }
-  }
+  };
 
   const handleActionButtons = () => {
-    if(props.onSelect) {
+    if (props.onSelect) {
       if (props.selectedId === props.id) {
         props.onSelect("");
       } else {
         props.onSelect(props.id);
       }
     }
-  }
+  };
 
   const handleFavorite = () => {
-    dispatch(toggleFavorite(props.id))
-  }
+    dispatch(toggleFavorite(props.id));
+  };
 
   const handleComment = () => {
     props.onCommentPress(props.id);
+  };
+
+  const image = () => {
+    if (props.image !== null && props.image !== "") {
+      if (props.image.startsWith("http")) {
+        return { uri: props.image };
+      }
+      return { uri: `data:image/jpg;base64,${props.image}` };
+    } else {
+      return require("../../assets/img/noUserImg.png");
+    }
   };
 
   const actionButton = () => {
@@ -97,17 +116,17 @@ const Post = (props) => {
           </TouchableOpacity>
         </View>
       );
-  }
+  };
 
   return (
     <TouchableOpacity
-      style={styles.post}
+      style={styles.knot}
       activeOpacity={1}
       delayPressIn={0}
       onPress={handleActionButtons}
     >
       <Card style={styles.image}>
-        <Image style={styles.image} source={{ uri: props.image }} />
+        <Image style={styles.image} source={image()} />
       </Card>
       <View style={styles.container}>
         <Card style={styles.card}>
@@ -126,7 +145,7 @@ const Post = (props) => {
 };
 
 const styles = StyleSheet.create({
-  post: {
+  knot: {
     width: "100%",
     flexDirection: "row",
   },
@@ -167,4 +186,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Post;
+export default Knot;

@@ -41,6 +41,14 @@ export const insertKnotQuery = `
   INSERT INTO knots (author_id, db_id, date, message, favorite) VALUES (?, ?, strftime('%s', ?), ?, ?);
 `;
 
+export const removeKnotQuery = `
+  DELETE FROM knots WHERE db_id = ?;
+`;
+
+export const selectOneKnotQuery = `
+SELECT a.db_id as "author_id", a.name as "author_name", a.image as "author_image", k.db_id as "id", k.message, datetime(k.date,'unixepoch') as "date", k.favorite FROM knots k JOIN authors a ON a.id = k.author_id WHERE k.db_id = ?;
+`;
+
 export const selectAllKnotsQuery = `
   SELECT a.db_id as "author_id", a.name as "author_name", a.image as "author_image", k.db_id as "id", k.message, datetime(k.date,'unixepoch') as "date", k.favorite FROM knots k JOIN authors a ON a.id = k.author_id;
 `;

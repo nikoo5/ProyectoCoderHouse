@@ -7,6 +7,6 @@ export const selectComment = (id) => ({
 });
 
 export const filterComments = (id) => ({
-    type: FILTER_COMMENTS,
-    postID: id
-})
+  type: FILTER_COMMENTS,
+  knotID: id,
+});

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import Post from "../../components/homeScreen/Post";
-import { getFavorites } from "../../store/actions/posts.actions";
+import Knot from "../../components/homeScreen/Knot";
+import { getFavorites } from "../../store/actions/knots.actions";
 
 const FavoriteScreen = (props) => {
   const dispatch = useDispatch();
-  const favoritePosts = useSelector((state) => state.posts.filteredPosts) || [];
+  const favoriteKnots = useSelector((state) => state.knots.filteredKnots) || [];
 
   useEffect(() => {
     dispatch(getFavorites());
@@ -15,15 +15,15 @@ const FavoriteScreen = (props) => {
   return (
     <FlatList
       style={styles.mainContainer}
-      data={favoritePosts}
+      data={favoriteKnots}
       keyExtractor={(x) => x.id}
       renderItem={(data) => {
         return (
-          <Post
+          <Knot
             id={data.item.id}
             favorite={data.item.favorite}
-            image={data.item.author.image}
-            author={data.item.author.name}
+            image={data.item.author.profileImage}
+            author={data.item.author.name + " " + data.item.author.lastName}
             date={data.item.date}
             message={data.item.message}
           />

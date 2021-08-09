@@ -6,8 +6,10 @@ import {
   insertAuthorQuery,
   insertKnotQuery,
   insertNewKnotQuery,
+  removeKnotQuery,
   selectAllKnotsQuery,
   selectAuthorByDbId,
+  selectOneKnotQuery,
 } from "./querys.sql";
 import moment from "moment";
 
@@ -123,6 +125,28 @@ export const insertNewKnot = (user, author_db_id, db_id, message) => {
     } else {
       reject("No se pudo crear el autor");
     }
+  });
+};
+
+export const removeKnot = (db_id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(removeKnotQuery, [db_id], (_, result) => resolve(result)),
+        (_, error) => reject(error);
+    });
+  });
+};
+
+export const fetchKnot = (db_id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        selectOneKnotQuery,
+        [db_id],
+        (_, result) => resolve(result),
+        (_, error) => reject(error)
+      );
+    });
   });
 };
 

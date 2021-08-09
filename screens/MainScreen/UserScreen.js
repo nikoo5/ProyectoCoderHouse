@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import Card from "../../components/Card";
-import { author_coder } from "../../data/posts";
+import { author_coder } from "../../data/knots";
 import Styles from "../../constants/Styles";
 import Colors from "../../constants/Colors";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -34,7 +34,11 @@ const UserScreen = (props) => {
 
   useEffect(() => {
     if (user.profileImage !== null && user.profileImage !== "") {
-      setImage({ uri: `data:image/jpg;base64,${user.profileImage}` });
+      if (user.profileImage.startsWith("http")) {
+        setImage({ uri: user.profileImage });
+      } else {
+        setImage({ uri: `data:image/jpg;base64,${user.profileImage}` });
+      }
     }
     if (error !== "") {
       Alert.alert("Error!", error, [{ text: "OK" }]);

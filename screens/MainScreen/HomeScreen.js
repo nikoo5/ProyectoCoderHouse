@@ -4,28 +4,34 @@ import { useDispatch, useSelector } from "react-redux";
 import FloatingPlusButton from "../../components/FloatingPlusButton";
 import ModalAdd from "../../components/homeScreen/ModalAdd";
 import ModalDelete from "../../components/homeScreen/ModalDelete";
-import Post from "../../components/homeScreen/Post";
+import Knot from "../../components/homeScreen/Knot";
 import {
-  selectPost,
-  addPost,
-  deletePost,
-} from "../../store/actions/posts.actions";
+  selectKnot,
+  deleteKnot,
+  addKnot,
+  loadKnots,
+} from "../../store/actions/knots.actions";
 
 const HomeScreen = ({ navigation, route }) => {
+  const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
-  const listPosts = useSelector((state) => state.posts.list);
-  const selectedPost = useSelector((state) => state.posts.selected) || {
+  const listKnots = useSelector((state) => state.knots.list);
+  const selectedKnots = useSelector((state) => state.knots.selected) || {
     id: "",
     author: {
       name: "",
     },
   };
 
+  // console.log(listKnots);
+
   const [modalAddVisible, setModalAddVisible] = useState(false);
   const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
 
-  const handleSelectPost = (postId) => {
-    dispatch(selectPost(postId));
+  const handleSelectKnot = (knotId) => {
+    dispatch(selectKnot(knotId));
   };
 
   const handleModalAdd = () => {
@@ -36,13 +42,13 @@ const HomeScreen = ({ navigation, route }) => {
   };
   const handleConfirmAdd = (message) => {
     if (message.trim() != "") {
-      dispatch(addPost(message.trim()));
+      dispatch(addKnot(auth, user, message));
     }
     setModalAddVisible(false);
   };
 
-  const handleModalDelete = (post) => {
-    dispatch(selectPost(post.id));
+  const handleModalDelete = (knot) => {
+    dispatch(selectKnot(knot.id));
     setModalDeleteVisible(true);
   };
 
@@ -50,14 +56,18 @@ const HomeScreen = ({ navigation, route }) => {
     setModalDeleteVisible(false);
   };
 
-  const handleConfirmDelete = (postId) => {
-    dispatch(deletePost(postId));
+  const handleConfirmDelete = (knotId) => {
+    dispatch(deleteKnot(auth, knotId));
     setModalDeleteVisible(false);
   };
 
-  const handleCommentPress = (postId) => {
-    navigation.navigate("CommentScreen", { postId: postId });
+  const handleCommentPress = (knotId) => {
+    navigation.navigate("CommentScreen", { knotId: knotId });
   };
+
+  // useEffect(() => {
+  //   dispatch(loadKnots(auth));
+  // }, []);
 
   return (
     <>
@@ -71,25 +81,25 @@ const HomeScreen = ({ navigation, route }) => {
         visible={modalDeleteVisible}
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
-        postId={selectedPost.id}
-        authorName={selectedPost.author.name}
+        knotId={selectedKnots.id}
+        authorName={selectedKnots.author.name}
       />
 
       <FlatList
         style={styles.mainContainer}
-        data={listPosts}
+        data={listKnots}
         keyExtractor={(x) => x.id}
         renderItem={(data) => {
           return (
-            <Post
+            <Knot
               id={data.item.id}
               favorite={data.item.favorite}
-              image={data.item.author.image}
-              author={data.item.author.name}
+              image={data.item.author.profileImage}
+              author={data.item.author.name + " " + data.item.author.lastName}
               date={data.item.date}
               message={data.item.message}
-              selectedId={selectedPost.id}
-              onSelect={handleSelectPost}
+              selectedId={selectedKnots.id}
+              onSelect={handleSelectKnot}
               onSelected={() => {
                 handleModalDelete(data.item);
               }}

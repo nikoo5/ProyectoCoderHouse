@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import ButtonPrimary from "../../components/ButtonPrimary";
 import Card from "../../components/Card";
 import CommentItem from "../../components/commentScreen/CommentItem";
-import Post from "../../components/homeScreen/Post";
+import Knot from "../../components/homeScreen/Knot";
 import { filterComments } from "../../store/actions/comments.actions";
 
 const CommentScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
-  const post = useSelector(state => state.posts.selected)
+  const knot = useSelector((state) => state.knots.selected);
   const comments =
     useSelector((state) => state.comments.filteredComments) || [];
 
   useEffect(() => {
-    dispatch(filterComments(route.params.postId));
+    dispatch(filterComments(route.params.knotId));
   }, []);
 
   const renderItem = ({ item }) => <CommentItem comment={item} />;
@@ -36,12 +36,12 @@ const CommentScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <View>
-        <Post
-          id={post.id}
-          image={post.author.image}
-          author={post.author.name}
-          date={post.date}
-          message={post.message}
+        <Knot
+          id={knot.id}
+          image={knot.author.profileImage}
+          author={knot.author.name}
+          date={knot.date}
+          message={knot.message}
         />
       </View>
       <View style={styles.container}>
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontFamily: "comfortaa"
-  }
+    fontFamily: "comfortaa",
+  },
 });
 
 export default CommentScreen;

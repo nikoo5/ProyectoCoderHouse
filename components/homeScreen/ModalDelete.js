@@ -9,14 +9,18 @@ const ModalDelete = (props) => {
     <CustomModal visible={props.visible}>
       <View style={styles.mainContainer}>
         <Text style={styles.text}>
-          Estas seguro que deseas eliminar el post de "{props.authorName}"?
+          Estas seguro que deseas eliminar el nudo de "{props.authorName}"?
         </Text>
         <View style={styles.buttonsContainer}>
-          <ButtonSecondary text="CANCELAR" width={120} onPress={props.onCancel} />
+          <ButtonSecondary
+            text="CANCELAR"
+            width={120}
+            onPress={props.onCancel}
+          />
           <ButtonPrimary
             text="CONFIRMAR"
             width={120}
-            onPress={() => props.onConfirm(props.postId)}
+            onPress={() => props.onConfirm(props.knotId)}
           />
         </View>
       </View>
@@ -32,8 +36,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   text: {
-    marginBottom: 10
-  },    
+    marginBottom: 10,
+  },
   buttonsContainer: {
     width: "100%",
     flexDirection: "row",

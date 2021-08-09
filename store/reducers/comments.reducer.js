@@ -22,7 +22,7 @@ const CommentsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         filteredComments: [
-          ...state.list.filter((comment) => comment.postId === action.postID),
+          ...state.list.filter((comment) => comment.knotId === action.knotID),
         ],
       };
     default:

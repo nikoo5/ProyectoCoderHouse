@@ -22,7 +22,7 @@ export const loadUser = (uid, token) => {
     if (!response.ok) throw new Error("No se pudo cargar el usuario");
 
     const data = await response.json();
-    dispatch({ type: LOAD_USER, user: User.fromJson(data) });
+    dispatch({ type: LOAD_USER, user: User.fromJson(uid, data) });
   };
 };
 
