@@ -24,6 +24,41 @@ export { author_me, author_coder };
 export default [
   {
     author: author_me,
+    date: "2021-08-10T00:42:40.164Z",
+    favorite: false,
+    id: "4edbb689-0246-42eb-a285-55b98aaefbc3",
+    message: "---------------------\r\nDESAFÍO 07\r\n---------------------",
+  },
+  {
+    author: author_coder,
+    date: "2021-08-10T00:42:40.163Z",
+    favorite: false,
+    id: "4edbb689-0246-42eb-a285-55b98aaefbc4",
+    message:
+      "Hola Coder!\r\nPara el ultimo desafio, se implementó caracteristica del dispositivo: Ubicación!",
+  },
+  {
+    author: author_coder,
+    date: "2021-08-10T00:42:40.162Z",
+    favorite: false,
+    id: "4edbb689-0246-42eb-a285-55b98aaefbc5",
+    message:
+      "Ahora si haces TAP en este nudo, podras ver la ubicacion donde fue enviado!",
+    location: {
+      latitude: -34.5912,
+      longitude: -58.4601,
+    },
+  },
+  {
+    author: author_me,
+    date: "2021-08-10T00:42:40.161Z",
+    favorite: false,
+    id: "4edbb689-0246-42eb-a285-55b98aaefbc6",
+    message:
+      'Para enviar un nudo con ubicación solo basta con crear un nudo comun y corriente, y presionar en "Agregar Ubicación"!\r\nSaludos!',
+  },
+  {
+    author: author_me,
     date: "2021-08-06T00:42:40.164Z",
     favorite: false,
     id: "4edbb689-0246-42eb-a285-55b98aaefbc2",

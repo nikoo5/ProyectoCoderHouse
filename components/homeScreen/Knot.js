@@ -15,6 +15,7 @@ import Colors from "../../constants/Colors";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../store/actions/knots.actions";
+import MapView, { Marker } from "react-native-maps";
 
 const Knot = (props) => {
   const dispatch = useDispatch();
@@ -86,6 +87,30 @@ const Knot = (props) => {
     }
   };
 
+  const mapView = () => {
+    if (
+      (props.id === props.selectedId ||
+        (props.showMap !== null && props.showMap)) &&
+      props.location !== undefined &&
+      props.location !== null
+    ) {
+      const region = {
+        ...props.location,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1,
+      };
+      return (
+        <View style={styles.map}>
+          <MapView initialRegion={region} style={{ flex: 1 }}>
+            <Marker coordinate={region} />
+          </MapView>
+        </View>
+      );
+    }
+
+    return null;
+  };
+
   const actionButton = () => {
     if (props.id === props.selectedId)
       return (
@@ -137,6 +162,7 @@ const Knot = (props) => {
           <View style={styles.dataContainer}>
             <Text>{messageCleaner(props.message)}</Text>
           </View>
+          {mapView()}
           {actionButton()}
         </Card>
       </View>
@@ -183,6 +209,12 @@ const styles = StyleSheet.create({
   },
   message: {
     fontFamily: "comfortaa",
+  },
+  map: {
+    width: "100%",
+    height: 150,
+    borderRadius: 10,
+    marginBottom: 10,
   },
 });
 

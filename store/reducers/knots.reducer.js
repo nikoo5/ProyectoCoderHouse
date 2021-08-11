@@ -6,6 +6,7 @@ import {
   SELECT_KNOT,
   TOGGLE_FAVORITE,
 } from "../actions/knots.actions";
+import { selectComment } from "../actions/comments.actions";
 
 const INITIAL_STATE = {
   list: KNOTS,
@@ -19,7 +20,7 @@ const KnotsReducer = (state = INITIAL_STATE, action) => {
       const knotIndex = state.list.findIndex(
         (knot) => knot.id == action.knotID
       );
-      if (knotIndex === -1) return { ...state };
+      if (knotIndex === -1) return { ...state, selected: null };
       return {
         ...state,
         selected: state.list[knotIndex],

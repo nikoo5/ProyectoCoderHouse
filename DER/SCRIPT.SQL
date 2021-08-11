@@ -1,6 +1,6 @@
 ﻿/*
 Created: 4/8/2021
-Modified: 4/8/2021
+Modified: 10/8/2021
 Model: KnotIt
 Database: SQLite 3.7
 */
@@ -12,11 +12,11 @@ Database: SQLite 3.7
 
 CREATE TABLE authors
 (
-  id INTEGER NOT NULL,
+  id INTEGER NOT NULL
+        CONSTRAINT PK_authors PRIMARY KEY AUTOINCREMENT,
   db_id TEXT NOT NULL,
   name TEXT NOT NULL,
-  image TEXT,
-  CONSTRAINT PK_authors PRIMARY KEY (id)
+  image TEXT
 );
 
 CREATE INDEX authos_ix1 ON authors (id);
@@ -31,6 +31,8 @@ CREATE TABLE knots
   db_id TEXT NOT NULL,
   date REAL NOT NULL,
   message TEXT NOT NULL,
+  latitude REAL,
+  longitude REAL,
   favorite INTEGER NOT NULL,
   CONSTRAINT Relationship2 FOREIGN KEY (author_id) REFERENCES authors (id)
 );

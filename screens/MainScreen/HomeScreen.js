@@ -40,9 +40,9 @@ const HomeScreen = ({ navigation, route }) => {
   const handleCancelAdd = () => {
     setModalAddVisible(false);
   };
-  const handleConfirmAdd = (message) => {
-    if (message.trim() != "") {
-      dispatch(addKnot(auth, user, message));
+  const handleConfirmAdd = (data) => {
+    if (data.message.trim() != "") {
+      dispatch(addKnot(auth, user, data.message, data.location));
     }
     setModalAddVisible(false);
   };
@@ -98,6 +98,7 @@ const HomeScreen = ({ navigation, route }) => {
               author={data.item.author.name + " " + data.item.author.lastName}
               date={data.item.date}
               message={data.item.message}
+              location={data.item.location}
               selectedId={selectedKnots.id}
               onSelect={handleSelectKnot}
               onSelected={() => {

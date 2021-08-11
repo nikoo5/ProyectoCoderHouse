@@ -42,6 +42,8 @@ const CommentScreen = ({ navigation, route }) => {
           author={knot.author.name}
           date={knot.date}
           message={knot.message}
+          location={knot.location}
+          showMap={true}
         />
       </View>
       <View style={styles.container}>

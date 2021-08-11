@@ -73,7 +73,7 @@ export const selectKnot = (id) => ({
 //   };
 // };
 
-export const addKnot = (auth, author, message) => {
+export const addKnot = (auth, author, message, location) => {
   return async (dispatch) => {
     const uuid = require("uuid");
     const newId = uuid.v4();
@@ -90,6 +90,7 @@ export const addKnot = (auth, author, message) => {
           author_id: author.id,
           date: Date.now(),
           message: message,
+          location: location,
         }),
       }
     );
@@ -110,7 +111,13 @@ export const addKnot = (auth, author, message) => {
       }
     );
 
-    const local = await insertNewKnot(author, author.id, newId, message);
+    const local = await insertNewKnot(
+      author,
+      author.id,
+      newId,
+      message,
+      location
+    );
 
     dispatch({
       type: ADD_KNOT,
@@ -119,6 +126,7 @@ export const addKnot = (auth, author, message) => {
         author: author,
         date: new Date(),
         message: message,
+        location: location,
         favorite: false,
       },
     });

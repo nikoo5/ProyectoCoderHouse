@@ -6,7 +6,7 @@ import Colors from "./constants/Colors";
 import { useFonts } from "expo-font";
 import { Provider } from "react-redux";
 import store from "./store";
-import { cleanDb, initDb } from "./db";
+import { cleanDb, fetchKnots, initDb } from "./db";
 
 initDb()
   .then(() => {
@@ -15,7 +15,12 @@ initDb()
     //   console.log("DataBase Reseted");
     // });
     // fetchKnots().then((result) => {
-    //   console.log(result);
+    //   if (result.rows._array.length > 0) {
+    //     result.rows._array.forEach((fullData) => {
+    //       const { author_image, ...data } = fullData;
+    //       console.log(data);
+    //     });
+    //   }
     // });
   })
   .catch((err) => {
@@ -42,6 +47,7 @@ export default function App() {
       <View style={styles.app}>
         <SafeAreaView style={styles.safeArea}>
           <AppNavigator />
+          {/* <Test /> */}
         </SafeAreaView>
       </View>
     </Provider>

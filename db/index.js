@@ -13,7 +13,9 @@ import {
 } from "./querys.sql";
 import moment from "moment";
 
-const db = SQLite.openDatabase("knotit.db");
+const db = SQLite.openDatabase("knotit.db", "1.0", "KnotIt", null, () => {
+  console.log("DB OPENED");
+});
 
 export const cleanDb = () => {
   return new Promise((resolve, reject) => {
@@ -29,10 +31,10 @@ export const initDb = () => {
   return new Promise((resolve, reject) => {
     let ok = true;
     db.transaction((tx) => {
-      initSqlQuery.forEach((sql) => {
+      for (let i = 0; i < initSqlQuery.length; i++) {
         if (ok) {
           tx.executeSql(
-            sql,
+            initSqlQuery[i],
             [],
             () => {},
             (_, error) => {
@@ -41,7 +43,7 @@ export const initDb = () => {
             }
           );
         }
-      });
+      }
       if (ok) resolve();
     });
   });
@@ -94,7 +96,7 @@ export const insertKnot = (
   });
 };
 
-export const insertNewKnot = (user, author_db_id, db_id, message) => {
+export const insertNewKnot = (user, author_db_id, db_id, message, location) => {
   return new Promise(async (resolve, reject) => {
     let author = await fetchAuthor(author_db_id);
 
@@ -113,7 +115,13 @@ export const insertNewKnot = (user, author_db_id, db_id, message) => {
       db.transaction((tx) => {
         tx.executeSql(
           insertNewKnotQuery,
-          [author.rows.item(0).id, db_id, message],
+          [
+            author.rows.item(0).id,
+            db_id,
+            message,
+            location?.latitude || null,
+            location?.longitude || null,
+          ],
           (_, result) => {
             resolve(result);
           },

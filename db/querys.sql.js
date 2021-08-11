@@ -1,12 +1,17 @@
 export const initSqlQuery = [
+  // "DROP INDEX authos_ix1 ON authors;",
+  // "DROP INDEX IX_Relationship2 ON knots;",
+  // "DROP INDEX knots_ix1 ON knots;",
+  // "DROP TABLE knots;",
+  // "DROP TABLE authors;",
   `
     CREATE TABLE IF NOT EXISTS authors
     (
-      id INTEGER NOT NULL,
+      id INTEGER NOT NULL
+              CONSTRAINT PK_authors PRIMARY KEY AUTOINCREMENT,
       db_id TEXT NOT NULL,
       name TEXT NOT NULL,
-      image TEXT,
-      CONSTRAINT PK_authors PRIMARY KEY (id)
+      image TEXT
     );
   `,
   `
@@ -19,8 +24,10 @@ export const initSqlQuery = [
             CONSTRAINT PK_knots PRIMARY KEY AUTOINCREMENT,
       author_id INTEGER NOT NULL,
       db_id TEXT NOT NULL,
-      date INTEGER NOT NULL,
+      date REAL NOT NULL,
       message TEXT NOT NULL,
+      latitude REAL,
+      longitude REAL,
       favorite INTEGER NOT NULL,
       CONSTRAINT Relationship2 FOREIGN KEY (author_id) REFERENCES authors (id)
     );
@@ -34,11 +41,11 @@ export const initSqlQuery = [
 ];
 
 export const insertNewKnotQuery = `
-  INSERT INTO knots (author_id, db_id, date, message, favorite) VALUES (?, ?, strftime('%s','now'), ?, 0);
+  INSERT INTO knots (author_id, db_id, date, message, latitude, longitude, favorite) VALUES (?, ?, strftime('%s','now'), ?, ?, ?, 0);
 `;
 
 export const insertKnotQuery = `
-  INSERT INTO knots (author_id, db_id, date, message, favorite) VALUES (?, ?, strftime('%s', ?), ?, ?);
+  INSERT INTO knots (author_id, db_id, date, message, latitude, longitude, favorite) VALUES (?, ?, strftime('%s', ?), ?, ?, ?, ?);
 `;
 
 export const removeKnotQuery = `
@@ -46,11 +53,11 @@ export const removeKnotQuery = `
 `;
 
 export const selectOneKnotQuery = `
-SELECT a.db_id as "author_id", a.name as "author_name", a.image as "author_image", k.db_id as "id", k.message, datetime(k.date,'unixepoch') as "date", k.favorite FROM knots k JOIN authors a ON a.id = k.author_id WHERE k.db_id = ?;
+SELECT a.db_id as "author_id", a.name as "author_name", a.image as "author_image", k.db_id as "id", k.message, datetime(k.date,'unixepoch') as "date", k.latitude, k.longitude, k.favorite FROM knots k JOIN authors a ON a.id = k.author_id WHERE k.db_id = ?;
 `;
 
 export const selectAllKnotsQuery = `
-  SELECT a.db_id as "author_id", a.name as "author_name", a.image as "author_image", k.db_id as "id", k.message, datetime(k.date,'unixepoch') as "date", k.favorite FROM knots k JOIN authors a ON a.id = k.author_id;
+  SELECT a.db_id as "author_id", a.name as "author_name", a.image as "author_image", k.db_id as "id", k.message, datetime(k.date,'unixepoch') as "date", k.latitude, k.longitude, k.favorite FROM knots k JOIN authors a ON a.id = k.author_id;
 `;
 
 export const insertAuthorQuery = `
